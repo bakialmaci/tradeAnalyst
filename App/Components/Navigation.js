@@ -1,6 +1,5 @@
 import React from 'react';
 
-import {NavigationContainer} from '@react-navigation/native';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 
 import HomeScreen from '../Views/HomeScreen';
@@ -12,7 +11,7 @@ import {Icons} from '../Assets/Icons';
 
 const Tab = createMaterialBottomTabNavigator();
 
-export default function Navigation() {
+export default function Navigation({Data}) {
     return (
         <Tab.Navigator
             activeColor={Colors.primary}
@@ -25,14 +24,14 @@ export default function Navigation() {
         >
             <Tab.Screen
                 name="Home"
-                component={HomeScreen}
                 options={{
                     tabBarLabel: 'Markets',
                     tabBarIcon: ({color}) => (
                         <Icons.FontAwesome5 name="clipboard-list" color={color} size={24}/>
                     ),
-                }}
-            />
+                }}>
+                {props => <HomeScreen {...props} Data={Data}/>}
+            </Tab.Screen>
 
             <Tab.Screen
                 name="Favorites"
@@ -56,5 +55,5 @@ export default function Navigation() {
                 }}
             />
         </Tab.Navigator>
-);
+    );
 }

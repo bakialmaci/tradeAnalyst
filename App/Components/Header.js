@@ -5,11 +5,10 @@ import {
     StyleSheet,
 } from 'react-native';
 
-
-export default function Header() {
+export default function Header({title}) {
     return (
         <View style={styles.container}>
-            <Text style={styles.headerText}>Stock Market List</Text>
+            <Text style={styles.headerText}>{title}</Text>
         </View>
     );
 }

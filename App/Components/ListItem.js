@@ -7,16 +7,16 @@ import {
 
 import {Colors} from '../Assets/Colors';
 
-export default function ListItem() {
+export default function ListItem({ ad,kod }) {
     return (
         <View style={styles.container}>
             <View style={styles.leftSide}>
-                <Text style={styles.title}>USD</Text>
-                <Text style={styles.description}>ABD Dollar</Text>
+                <Text style={styles.title}>{kod}</Text>
+                <Text style={styles.description}>{ad}</Text>
             </View>
             <View style={styles.rightSide}>
-                <Text style={styles.value}>6.8449</Text>
-                <Text style={styles.activity}>0.47%</Text>
+                <Text style={styles.value}>--</Text>
+                <Text style={styles.activity}>--.--%</Text>
             </View>
         </View>
     );

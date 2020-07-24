@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {
     StyleSheet,
     Text,
@@ -6,66 +6,21 @@ import {
 } from 'react-native';
 
 import {Colors} from '../Assets/Colors';
+import {GetMarketList} from '../Modules/GetMarketList';
 
-import Config from 'react-native-config';
-import AsyncStorage from '@react-native-community/async-storage';
-
-const GetMarketList = async () => {
-    const storeData = async (value) => {
-        try {
-            const res = await AsyncStorage.getItem('MarketList');
-            if (value === null) {
-                const jsonValue = JSON.stringify(value);
-                await AsyncStorage.setItem('MarketList', jsonValue);
-                console.log("Data Successfully Stored!");
-                return jsonValue
-            }else{
-                console.log("Data Already Stored!");
-                return res
-            }
-
-        } catch (e) {
-            console.log('Store Data Error', e);
-        }
-    };
-
-    const getData = async () => {
-        try {
-            return await AsyncStorage.getItem('MarketList');
-        } catch (e) {
-            console.log('Read Data Error', e);
-        }
-    };
-
-    getData().finally(res => {
-        if(res){
-            console.log("Response is not Null!");
-            {return res}
-        }else{
-            console.log("Response is Null!");
-            return (
-                fetch(Config.GetMarketURL)
-                    .then((response) => response.json())
-                    .then((json) => storeData(json.data))
-                    .catch((error) => console.error(error))
-                // .finally(() => setLoading(false))
-            );
-        }
-    })
-}
-
-export default function SplashScreen() {
-    const [list, setList] = useState(null);
-
-    GetMarketList().then(r => setList(r))
+export default function SplashScreen({setSplash,setData}) {
+    const [data,loading] = GetMarketList();
 
     useEffect(() => {
-        console.log(list," !!!!");
-    }, [list]);
+        if(!loading && data.length){
+            setData(data)
+            setSplash(loading);
+        }
+    }, [data,loading]);
 
     return (
-        <View>
-
+        <View style={styles.container}>
+            <Text>Splash Screen</Text>
         </View>
     );
 }
