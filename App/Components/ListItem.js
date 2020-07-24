@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
         paddingVertical: 6,
         borderBottomWidth: 1,
         borderColor: Colors.sepColor,
+        marginHorizontal: 16,
     },
     title: {
         fontSize: 18,
